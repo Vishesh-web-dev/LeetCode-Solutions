@@ -30,7 +30,7 @@ public:
                 prev = head;
                 head = head->next;
             }
-            if( head != nullptr && remain!=0){
+            if(remain!=0){
                 remain--;
                 prev = head;
                 head = head->next;
