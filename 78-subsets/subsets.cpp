@@ -1,19 +1,19 @@
 class Solution {
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
-        //using bit masking
-        vector<vector<int>> ans;
-        int n = nums.size();
-
-        for(int i = 0 ; i < (1 << n) ; i++){
-            vector<int> temp;
-            for(int j = 0 ; j < n ; j++){
-                if(i & (1 << j)){
-                    temp.push_back(nums[j]);
+        vector<vector<int>> res;
+        int max_size = nums.size();
+        int max_mask = (1 << max_size) - 1;
+        for(int i = 0 ; i<= max_mask ; i++){
+            vector<int> curr;
+            for(int j = 0 ; j < max_size ; j++){
+                int shouldInclude = (i >> j) & 1;
+                if(shouldInclude == 1){
+                    curr.push_back(nums[j]);
                 }
             }
-            ans.push_back(temp);
+            res.push_back(curr);
         }
-        return ans;
+        return res;
     }
 };
