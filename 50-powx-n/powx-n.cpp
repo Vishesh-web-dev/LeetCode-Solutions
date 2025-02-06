@@ -11,8 +11,6 @@ public:
 
         if (n == 0) {
             return 1;
-        } else if (n == 1) {
-            return isNeg ? 1/x: x;
         } else if (n & 1) {
             double res = x * myPow(x, exp - 1);
             return isNeg ? 1/res: res;
