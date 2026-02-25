@@ -1,10 +1,10 @@
 class Solution {
-    static bool comp (int a, int b){
-        int as1 = __builtin_popcount(a);
-        int bs1 = __builtin_popcount(b);
-        return as1 == bs1 ? a < b : as1 < bs1;
-    }
 public:
+    static bool comp (int a, int b){
+        int bitCountA = __builtin_popcount(a);
+        int bitCountB = __builtin_popcount(b);
+        return bitCountA == bitCountB ? a < b : bitCountA < bitCountB;
+    }
     vector<int> sortByBits(vector<int>& arr) {
          sort(arr.begin(), arr.end(), comp);
          return arr;
