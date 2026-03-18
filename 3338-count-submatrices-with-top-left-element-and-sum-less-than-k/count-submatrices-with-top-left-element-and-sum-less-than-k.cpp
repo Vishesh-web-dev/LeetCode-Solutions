@@ -3,12 +3,26 @@ public:
     int countSubmatrices(vector<vector<int>>& grid, int k) {
         int m = grid.size(), n = grid[0].size();
 
-        vector<vector<int>> sum(m+1, vector<int>(n+1, 0));
         int lessThanKCnt = 0;
-        for(int i =1 ; i<= m ; i++){
-            for(int j = 1; j<= n ; j++){
-                sum[i][j] = grid[i-1][j-1] + sum[i-1][j] + sum[i][j-1] - sum[i-1][j-1];
-                if(sum[i][j] <= k) {
+        if(grid[0][0] <= k){
+            lessThanKCnt++;
+        }
+        for(int i = 1 ; i<m ; i++){
+            grid[i][0] += grid[i-1][0];
+            if(grid[i][0] <= k) {
+                    lessThanKCnt++;
+            }
+        }
+        for(int j= 1 ; j<n ; j++){
+            grid[0][j] += grid[0][j-1];
+            if(grid[0][j] <= k) {
+                    lessThanKCnt++;
+            }
+        }
+        for(int i =1; i< m ; i++){
+            for(int j = 1; j< n ; j++){
+                grid[i][j] += grid[i-1][j] + grid[i][j-1] - grid[i-1][j-1];
+                if(grid[i][j] <= k) {
                     lessThanKCnt++;
                 }
             }
