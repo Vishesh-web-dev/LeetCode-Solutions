@@ -1,30 +1,23 @@
 class Solution {
 public:
     int largestSubmatrix(vector<vector<int>>& matrix) {
-
-        vector<int> consecutiveOnes(matrix[0].size(), 0);
-        int largestArea = 0;
-
-        for(int row = 0 ; row < matrix.size(); row++){
-
-            for(int col = 0 ; col < matrix[0].size(); col++){
-
-                if(matrix[row][col] == 0){
-                    consecutiveOnes[col] = 0;
-                }else{
-                    consecutiveOnes[col]++;
+        int m = matrix.size(), n = matrix[0].size();
+        int maxArea = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == 0) {
+                    matrix[i][j] = 0;
+                } else if(i!=0){
+                    matrix[i][j] += matrix[i - 1][j];
                 }
             }
+            vector<int> prefix = matrix[i];
+            sort(prefix.begin(), prefix.end(), greater<int>());
 
-             vector<int> temp = consecutiveOnes;
-
-            sort(temp.begin(),temp.end(),greater<int>());
-
-            for(int i=0;i< matrix[0].size();i++){
-                largestArea=max(largestArea,temp[i]*(i+1)); //conidering every possible rectangle with it
+            for(int itr = 0; itr< n ; itr++){
+                maxArea = max(maxArea, prefix[itr] * (itr+1));
             }
         }
-
-        return largestArea;
+        return maxArea;
     }
 };
