@@ -3,29 +3,15 @@ class Solution {
 
 public:
     bool canBeEqual(string s1, string s2) {
-        bool isStringsEqual = isEqual(s1, s2);
-
-        if (isStringsEqual)
-            return isStringsEqual;
-
-        swap(s1[0], s1[2]);
-
-        isStringsEqual = isEqual(s1, s2);
-        if (isStringsEqual)
-            return isStringsEqual;
-
-        swap(s1[1], s1[3]);
-
-        isStringsEqual = isEqual(s1, s2);
-        if (isStringsEqual)
-            return isStringsEqual;
-
-        swap(s1[0], s1[2]);
-
-        isStringsEqual = isEqual(s1, s2);
-        if (isStringsEqual)
-            return isStringsEqual;
-
+        for (int i = 0; i < 4; i++) {
+            if (i & 1) {
+                swap(s1[1], s1[3]);
+            } else {
+                swap(s1[0], s1[2]);
+            }
+            if (s1 == s2)
+                return true;
+        }
         return false;
     }
 };
